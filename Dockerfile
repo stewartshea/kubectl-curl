@@ -13,7 +13,7 @@ RUN apt-get update -qq \
  && rm -rf /var/lib/apt/lists/*
 
 # Fetch the exact kubectl version requested
-RUN curl -fsSL -o /usr/local/bin/kubectl \
+RUN curl -fsSL --fail -o /usr/local/bin/kubectl \
       "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" \
  && chmod +x /usr/local/bin/kubectl
 
