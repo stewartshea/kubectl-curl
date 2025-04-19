@@ -13,8 +13,11 @@ RUN apt-get update -qq \
  && rm -rf /var/lib/apt/lists/*
 
 # Fetch the exact kubectl version requested
-RUN curl -fsSL --fail -o /usr/local/bin/kubectl \
+RUN curl -fsSL -o /usr/local/bin/kubectl.tmp \
       "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" \
+ && file /usr/local/bin/kubectl.tmp | grep -q 'x86-64' \
+ || { echo "downloaded file is not amd64 ELF"; exit 1; } \
+ && mv /usr/local/bin/kubectl.tmp /usr/local/bin/kubectl \
  && chmod +x /usr/local/bin/kubectl
 
 ENTRYPOINT ["/bin/bash"]
