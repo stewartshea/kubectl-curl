@@ -17,6 +17,6 @@ RUN curl -fsSL --fail -o /usr/local/bin/kubectl \
       "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" \
  && chmod +x /usr/local/bin/kubectl
 
-RUN kubectl version
+RUN kubectl version --client --short
 
 ENTRYPOINT ["/bin/bash"]

@@ -49,9 +49,3 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/kubectl-curl:latest
           build-args: |
             KUBECTL_VERSION=${{ steps.kv.outputs.kubectl_version }}
-
-      # 5. Sanity‑check the resulting image
-      - name: Verify kubectl version inside the image
-        run: |
-          docker run --rm ghcr.io/${{ github.repository_owner }}/kubectl-curl:${{ steps.kv.outputs.kubectl_version }} \
-            kubectl version --client --short
